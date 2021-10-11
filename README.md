@@ -1,33 +1,32 @@
-### Termos e acordos
+# Avisos
 
-Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe
+Projeto de Backend desenvolvido no curso da Trybe.
 
-# Boas vindas ao repositório do projeto Cookmaster!
+Aqui temos uma API que utiliza um CRUD de receitas.
+Posssibilidade de criar e excluir usuarios.
+Qualquer usuario cadastrado pode criar uma receita, e apenas o dono da receita ou o admin podem modificá-la.
 
-Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver os projetos, você deverá seguir as instruções a seguir. Fique atento a cada passo, e se tiver qualquer dúvida, nos envie por Slack! #vqv 🚀
+API criada com  Nodejs e Express.
+Banco de dados utilizado foi o MongoDB.
 
-Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu projeto a partir deste repositório, utilizando uma branch específica e um Pull Request para colocar seus códigos.
+Autenticação de usuários foi fetia com JWT.
+Arquitetura MSC.
+
+Com testes de cobertura usando Sinon e chai.
 
 ---
-
 # Sumário
-
-- [Boas vindas ao repositório do projeto Cookmaster!](#boas-vindas-ao-repositório-do-projeto-cookmaster)
 - [Habilidades](#habilidades)
-- [Entregáveis](#entregáveis)
   - [O que deverá ser desenvolvido](#o-que-deverá-ser-desenvolvido)
   - [Desenvolvimento](#desenvolvimento)
-  - [Data de Entrega](#data-de-entrega)
-- [Instruções para entregar seu projeto](#instruções-para-entregar-seu-projeto)
-  - [Antes de começar a desenvolver](#antes-de-começar-a-desenvolver)
-  - [Durante o desenvolvimento](#durante-o-desenvolvimento)
+ - [Como Utilizar o projeto](#como-utilizar-o-projeto)
+    - [Configuração inicial](#configuração-inicial)
+    - [Rodando o Projeto](#rodando-o-projeto)
+    - [Utilizando as rotas](#utilizando-as-rotas)
 - [Como desenvolver](#como-desenvolver)
   - [Todos os seus endpoints devem estar no padrão REST](#todos-os-seus-endpoints-devem-estar-no-padrão-rest)
   - [Conexão com o Banco](#conexão-com-o-banco)
   - [Coleções](#coleções)
-  - [Linter](#linter)
-  - [Testes](#testes)
-    - [Dica: desativando testes](#dica-desativando-testes)
 - [Requisitos do projeto](#requisitos-do-projeto)
   - [Requisitos Obrigatórios](#requisitos-obrigatórios)
     - [1 - Crie um endpoint para o cadastro de usuários](#1---crie-um-endpoint-para-o-cadastro-de-usuários)
@@ -45,12 +44,8 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
     - [12 - Crie um endpoint para cadastro de pessoas administradoras](#12---crie-um-endpoint-para-cadastro-de-pessoas-administradoras)
     - [13 - Crie testes de integração que cubram no mínimo 60% dos arquivos em `src`, com um mínimo de 100 linhas cobertas](#13---crie-testes-de-integração-que-cubram-no-mínimo-60-dos-arquivos-em-src-com-um-mínimo-de-100-linhas-cobertas)
     - [14 - Crie testes de integração que cubram no mínimo 90% dos arquivos em `src`, com um mínimo de 150 linhas cobertas](#14---crie-testes-de-integração-que-cubram-no-mínimo-90-dos-arquivos-em-src-com-um-mínimo-de-150-linhas-cobertas)
-  - [Depois de terminar o desenvolvimento (opcional)](#depois-de-terminar-o-desenvolvimento-opcional)
-- [Revisando um pull request](#revisando-um-pull-request)
-- [Avisos finais](#avisos-finais)
 
 ---
-
 # Habilidades
 
 Neste projeto, você será capaz de:
@@ -70,15 +65,6 @@ Neste projeto, você será capaz de:
 - Realizar testes de integração
 
 ---
-
-# Entregáveis
-
-Para entregar o seu projeto você deverá criar um Pull Request neste repositório.
-
-Lembre-se que você pode consultar nosso conteúdo sobre [Git & GitHub](https://app.betrybe.com/course/fundamentals/git) sempre que precisar!
-
----
-
 ## O que deverá ser desenvolvido
 
 Você vai desenvolver seu app utilizando a arquitetura MSC!
@@ -86,7 +72,6 @@ Você vai desenvolver seu app utilizando a arquitetura MSC!
 Neste novo projeto deverá ser possível fazer o cadastro e login de pessoas usuárias, onde apenas essas pessoas poderão acessar, modificar e deletar as receitas que cadastrou.
 
 ---
-
 ## Desenvolvimento
 
 Você vai desenvolver todas as camadas da aplicação (Models, Service e Controllers) a partir do seu código no projeto cookmaster.
@@ -122,84 +107,36 @@ Deverá ser possível adicionar uma imagem à uma receita, utilizando o upload d
 
   // ...
   ```
-
 ---
+# Como utilizar o projeto
+  ## Configuração Inicial
+  - Após clonar o repositório rodar o comando `npm i` para instalar todas as dependências
+  - Tenha uma instancia do banco de dados MongoDB rodando em sua máquina
+  - no arquivo ./src/models/connection.js configurar o MONGO_DB_URL para o endereço da sua instancia do mongodb.
+  - Utilize um API Client como Insomnia ou Postman para fazer as requisições.
+  ## Rodando o projeto
+  - Utilizar o comando `npm run dev`, para rodar a api utilizando o nodemon, ou npm start para rodar usando o node
+  
+  ## Utilizando as rotas
+  Nesta api temos 3 rotas distintas: `/users`, `/login` e `/recipes`
+  
+  ### Utilizando a rota `/users`
+  - POST - no `/` para criar um novo usuário, passando como parametro um JSON contendo as chaves 'name', 'email' e 'password' e seus valores sendo strings.
+  - POST - no `/admin` para criar um novo admin utilizando os mesmos parâmetros no método de criar usuário, mas apenas um admin pode cadastrar um admin. (necessita fazer o login, ver abaixo)
+  
+  ### Utilizando a rota `/login`
+  - POST - no `/` para fazer o login e receber um token do tipo JWT para utilizar como autenticador. Devemos passar um JSON contendo as chaves 'email' e 'password' como parametro.
 
-## Data de Entrega
+  ### Utilizando a rota `/recipes`
+  - GET - no `/` para podermos consultar todas as receitas cadastradas ou no `/id` para consultar uma receita em específico
 
-    - Serão `3` dias de projeto.
-    - Data de entrega para avaliação final do projeto: `26/07/2021 - 14:00h`.
-
+  A partir daqui precisaremos fazer login para poder realizar as requisições e passar no Header uma chave 'Authorization' com o valor do token recebido no login.
+  
+  - POST - no `/` para podermos cadastrar uma nova receita, é necessário passar como parametro um JSON com as chaves 'name', 'ingredients' e 'preparation'. Qualquer usuário pode cadastrar uma receita.
+  - PUT - no `/id` utilizando o id da receita que desejamos modificar, devemos passar como parametro um JSON, com as mesmas chaves utilizadas anteriormente ao cadastrar uma receita. Vale lembrar que apenas o usuário criador da receita ou um admin podem alterar os dados da mesma.
+  - DELETE - no `/id`, não precisamos passar nenhum JSON, mas apenas o dono da receita ou um admin podem deletá-la.
+ 
 ---
-
-# Instruções para entregar seu projeto
-
-## Antes de começar a desenvolver
-
-1. Clone o repositório
-
-- `git clone https://github.com/tryber/sd-09-cookmaster.git`.
-- Entre na pasta do repositório que você acabou de clonar:
-  - `cd sd-09-cookmaster`
-
-2. Instale as dependências [**Caso existam**]
-
-- `npm install`
-
-3. Crie uma branch a partir da branch `master`
-
-- Verifique que você está na branch `master`
-  - Exemplo: `git branch`
-- Se não estiver, mude para a branch `master`
-  - Exemplo: `git checkout master`
-- Agora crie uma branch à qual você vai submeter os `commits` do seu projeto
-  - Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
-  - Exemplo: `git checkout -b joaozinho-sd-0x-cookmaster`
-
-4. Adicione as mudanças ao _stage_ do Git e faça um `commit`
-
-- Verifique que as mudanças ainda não estão no _stage_
-  - Exemplo: `git status` (deve aparecer listada a pasta _joaozinho_ em vermelho)
-- Adicione o novo arquivo ao _stage_ do Git
-    - Exemplo:
-      - `git add .` (adicionando todas as mudanças - _que estavam em vermelho_ - ao stage do Git)
-      - `git status` (deve aparecer listado o arquivo _joaozinho/README.md_ em verde)
-- Faça o `commit` inicial
-    - Exemplo:
-      - `git commit -m 'iniciando o projeto x'` (fazendo o primeiro commit)
-      - `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
-
-5. Adicione a sua branch com o novo `commit` ao repositório remoto
-
-- Usando o exemplo anterior: `git push -u origin joaozinho-sd-0x-cookmaster`
-
-6. Crie um novo `Pull Request` _(PR)_
-
-- Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-0x-cookmaster/pulls)
-- Clique no botão verde _"New pull request"_
-- Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
-- Clique no botão verde _"Create pull request"_
-- Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
-- **Não se preocupe em preencher mais nada por enquanto!**
-- Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-0x-cookmaster/pulls) e confira que o seu _Pull Request_ está criado
-
----
-
-## Durante o desenvolvimento
-
-- Faça `commits` das alterações que você fizer no código regularmente.
-
-- Lembre-se de sempre após um (ou alguns) `commits` atualizar o repositório remoto.
-
-- Os comandos que você utilizará com mais frequência são:
-  1. `git status` _(para verificar o que está em vermelho - fora do stage - e o que está em verde - no stage)_
-  2. `git add` _(para adicionar arquivos ao stage do Git)_
-  3. `git commit` _(para criar um commit com os arquivos que estão no stage do Git)_
-  4. `git push -u nome-da-branch` _(para enviar o commit para o repositório remoto na primeira vez que fizer o `push` de uma nova branch)_
-  5. `git push` _(para enviar o commit para o repositório remoto após o passo anterior)_
-
----
-
 # Como desenvolver
 
 **⚠️ Leia-os atentamente e siga à risca o que for pedido. ⚠️**
@@ -282,69 +219,6 @@ A resposta do insert para ser retornada após a criação é esta:
 { "_id" : ObjectId("5f46919477df66035f61a356"), "name" : "string", "ingredients" : "string", "preparation" : "string", "userId" : ObjectId("5f46914677df66035f61a355") }
 ```
 (O _id será gerado automaticamente pelo mongodb, e o userId será gerado com o id do usuário que criou a receita)
-
----
-
-## Linter
-
-Usaremos o [ESLint](https://eslint.org/) para fazer a análise estática do seu código.
-
-Este projeto já vem com as dependências relacionadas ao _linter_ configuradas no arquivos `package.json`.
-
-Para poder rodar os `ESLint` em um projeto basta executar o comando `npm install` dentro do projeto e depois `npm run lint`. Se a análise do `ESLint` encontrar problemas no seu código, tais problemas serão mostrados no seu terminal. Se não houver problema no seu código, nada será impresso no seu terminal.
-
-⚠ PULL REQUESTS COM ISSUES DE LINTER NÃO SERÃO AVALIADAS. ATENTE-SE PARA RESOLVÊ-LAS ANTES DE FINALIZAR O DESENVOLVIMENTO! ⚠
-
-Você pode também instalar o plugin do `ESLint` no `VSCode`, bastar ir em extensions e baixar o [plugin `ESLint`](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
-
-## Testes
-
-Todos os requisitos do projeto serão testados **automaticamente**. Cada `endpoint` possui vários requisitos e os testes para cada requisito de um `endpoint` estão no arquivo de teste correspondente.
-
-_**Por exemplo**: Os requisitos relacionados ao `endpoint` `/users` estão no arquivo `users.test.js`._
-
-Para executar os testes localmente, digite no terminal o comando `npm test`.
-
-Inicialmente todos os testes falharão:
-
-![Todos os testes falharão](./public/all-tests-fail.jpeg)
-
-### Dica: desativando testes
-
-Especialmente no início, quando a maioria dos testes está falhando, a saída após executar os testes é bastante poluída. Você pode desabilitar temporariamente um teste utilizando a função `skip` junto à função `it`. Como o nome indica, esta função "pula" um teste:
-
-```js
-  it.skip('Será validado que o campo "email" é obrigatório', async () => {
-    await frisby
-      .post(`${url}/users/`,
-        {
-          name: 'Erick Jacquin',
-          password: '12345678',
-        })
-      .expect('status', 400)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Invalid entries. Try again.');
-      });
-  })
-```
-
-Uma estratégia é pular todos os testes no início e ir implementando um teste de cada vez, removendo dele a função `skip`.
-
-![Testando um arquivo específico](./public/skip-tests.jpeg)
-
-Você também pode rodar apenas um arquivo de teste, por exemplo:
-
-```bash
-npm test users.test.js
-```
-
-![Testando um arquivo específico](./public/running-one-test-file.jpeg)
-
-⚠️ Lembre-se de não entregar o projeto com nenhum teste ignorado. **Testes ignorados serão tratados como testes falhando**. ⚠️
-
-⚠️ **Não apague, em hipótese alguma, qualquer teste ou arquivo deste repositório**. ⚠️
 
 ---
 
@@ -809,35 +683,3 @@ O resultado do percentual total de cobertura deve ser igual ou maior que `90`;
 O resultado do numero total de linhas cobertas deve ser igual ou maior que `150`.
 
 ---
-
-## Depois de terminar o desenvolvimento (opcional)
-
-Para sinalizar que o seu projeto está pronto para o _"Code Review"_ dos seus colegas, faça o seguinte:
-
-* Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas:
-
-  * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**;
-
-  * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**;
-
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-00`.
-
-Caso tenha alguma dúvida, [aqui tem um video explicativo](https://vimeo.com/362189205).
-
----
-
-# Revisando um pull request
-
-Use o conteúdo sobre [Code Review](https://course.betrybe.com/real-life-engineer/code-review/) para te ajudar a revisar os _Pull Requests_.
-
-#VQV
-
----
-
-# Avisos finais
-
-Ao finalizar e submeter o projeto, não se esqueça de avaliar sua experiência preenchendo o formulário. Leva menos de 3 minutos!
-
-Link: [FORMULÁRIO DE AVALIAÇÃO DE PROJETO](https://be-trybe.typeform.com/to/ZTeR4IbH)
-
-O avaliador automático não necessariamente avalia seu projeto na ordem em que os requisitos aparecem no readme. Isso acontece para deixar o processo de avaliação mais rápido. Então, não se assuste se isso acontecer, ok?
