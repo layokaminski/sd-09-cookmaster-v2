@@ -1,4 +1,4 @@
-# Avisos
+# Sobre o Projeto
 
 Projeto de Backend desenvolvido no curso da Trybe.
 
